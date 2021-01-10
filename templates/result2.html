@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title style="">{{ title }}</title>
+    <style>
+h2.header {border-style:double;}
+body {font-family: Arial, Helvetica, sans-serif;  background-color:lemonchiffon;}
+        * {box-sizing: border-box;}
+        
+    
+        
+        /* Set a style for all buttons */
+        button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 15px;
+          cursor: pointer;
+          width: 100%;
+          opacity: 0.9;
+        
+        }
+        
+        button:hover {
+          opacity:1;
+        }
+        
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+          padding: 10px 15px;
+          background-color: #f44336;
+        }
+        
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+          float: left;
+          width: 50%;
+        }
+        
+        /* Add padding to container elements */
+        .container {
+          padding: 16px;
+        }
+        
+       
+        /* The Modal (background) */
+        .modal {
+          display: none; 
+          position: fixed; /* Stay in place */
+          z-index: 1;
+          right: 0;
+          top: 2;
+          width: 80%; /* Full width */
+          height: 80%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: #474e5d;
+          padding-top: 50px;
+        }
+        
+        
+        /* Modal Content/Box */
+        .modal-content {
+          background-color: #fefefe;
+          margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+          border: 1px solid #888;
+          width: 50%; /* Could be more or less, depending on screen size */
+        }
+        
+        /* Style the horizontal ruler */
+        hr {
+          border: 1px solid #f1f1f1;
+          margin-bottom: 25px;
+        }
+         
+        /* The Close Button (x) */
+        .close {
+          position: absolute;
+          right: 35px;
+          top: 15px;
+          font-size: 40px;
+          font-weight: bold;
+          color: #f1f1f1;
+        }
+        
+        .close:hover,
+        .close:focus {
+          color: #f44336;
+          cursor: pointer;
+        }
+        
+        /* Clear floats */
+        .clearfix::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+          .cancelbtn, .signupbtn {
+             width: 100%;
+          }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/">&#9750; Home</a>
+    <a onclick="document.getElementById('cropform').style.display='block'" style="width:auto; " >&#9921; Crop Details</a>
+    <a href="#">&#9743; Contact</a>
+  </div>
+  
+  <div style = "background-color: lightgreen;">
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">  &#9776; </span>
+</div>
+  <script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+  </script>
+
+
+<div id="cropform" class="modal" align ="centre">
+  <span onclick="document.getElementById('cropform').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action='/process2'  method = "post" >
+    <div class="container">
+      <h2>Get Details of a crop</h2>
+      <hr>
+      <label for="email"><b>Enter query crop</b></label>
+      <input type="text" placeholder="Crop Name" name="crop" required>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('cropform').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+
+var modal = document.getElementById('cropform');
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
+<!--CONTAINER-->
+<div class="container">
+    <h2 class="header" >Crop Details</h1>
+    <h4 class="subheader">You Typed : {{ crop_name }}</h4>
+
+    
+
+    <ul class="collection with-header">
+        <li class="collection-header"><h4><b>{{ list_header }}</b></h4></li>
+
+
+
+<table border="double" style="background-color:antiquewhite;">
+
+
+<tr>
+  <td><p>&nbsp; &nbsp; Soil types &nbsp; &nbsp;  </p></td>
+
+        {% for soil in soils %}
+            <td><a>&nbsp; &nbsp; {{ soil}} &nbsp; &nbsp;</a></td>
+        {% endfor %}
+
+      </tr>
+      <tr>
+        <td><p>&nbsp; &nbsp; Temperature range &nbsp; &nbsp;(In degrees celcius)&nbsp; &nbsp;  </p></td>
+     
+              {% for temp in temps %}
+                  <td><a>&nbsp; &nbsp;{{ temp}}&nbsp; &nbsp;</a></td>
+              {% endfor %}
+      
+            </tr>
+
+            <tr>
+              <td><p>&nbsp; &nbsp; Water requirement range &nbsp; &nbsp;(In mm)&nbsp; &nbsp;  </p></td>
+  
+                    {% for water in waters %}
+                        <td><a>&nbsp; &nbsp;{{water}}&nbsp; &nbsp;</a></td>
+                    {% endfor %}
+            
+                  </tr>
+
+                  <tr>
+                    <td><p>&nbsp; &nbsp; Rainfall requirement range &nbsp; &nbsp;(In cm)&nbsp; &nbsp; </p></td>
+                 
+                          {% for rainfall in rainfalls %}
+                              <td><a>&nbsp; &nbsp;{{rainfall}}&nbsp; &nbsp;</a></td>
+                          {% endfor %}
+                  
+                        </tr>
+
+                      </table>
+                    </ul>
+                  </div>
+<br>
+
+<br>
+
+</body>
+</html>

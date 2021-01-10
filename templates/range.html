@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <style>
+    h2.double {border-style: double;}
+
+    input[type=text], select {
+      width: 100%;
+      padding: 4px 3px;
+      margin: 8px 0;
+      background-color:rgb(245, 235, 220);
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+      width: 20%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 6px 5px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+
+    body {font-family: Arial, Helvetica, sans-serif; background-color:lemonchiffon;}
+        * {box-sizing: border-box;}
+        
+       
+        
+        
+        /* Set a style for all buttons */
+        button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 25px;
+          cursor: pointer;
+          width: 100%;
+          opacity: 0.9;
+        
+        }
+        
+        button:hover {
+          opacity:1;
+        }
+        
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+          padding: 10px 15px;
+          background-color: #f44336;
+        }
+        
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+          float: left;
+          width: 50%;
+        }
+        
+        /* Add padding to container elements */
+        .container {
+          padding: 16px;
+        }
+        
+        /* The Modal (background) */
+        .modal {
+          display: none; 
+          position: fixed; /* Stay in place */
+          z-index: 1;
+          right: 0;
+          top: 2;
+          width: 80%; /* Full width */
+          height: 80%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: #474e5d;
+          padding-top: 50px;
+        }
+        
+        
+        /* Modal Content/Box */
+        .modal-content {
+          background-color: #fefefe;
+          margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+          border: 1px solid #888;
+          width: 70%; /* Could be more or less, depending on screen size */
+        
+        }
+        
+        /* Style the horizontal ruler */
+        hr {
+          border: 1px solid #f1f1f1;
+          margin-bottom: 25px;
+        }
+         
+        /* The Close Button (x) */
+        .close {
+          position: absolute;
+          right: 35px;
+          top: 15px;
+          font-size: 40px;
+          font-weight: bold;
+          color: #f1f1f1;
+        }
+        
+        .close:hover,
+        .close:focus {
+          color: #f44336;
+          cursor: pointer;
+        }
+        
+        /* Clear floats */
+        .clearfix::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+        
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+          .cancelbtn, .signupbtn {
+             width: 100%;
+          }
+        }
+    </style>
+</head>
+<body>
+
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/"> &#9750;  Home</a>
+    <a onclick="document.getElementById('cropform').style.display='block'" style="width:auto; " >&#9921;  Crop Details</a>
+    <a href="#">&#9743;  Contact</a>
+  </div>
+  
+  <div style = "background-color: lightgreen;">
+  <span style="font-size:30px;cursor:pointer; background-color:mediumturquoise;" onclick="openNav()">  &#9776;</span>
+  </div>
+  <script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+  </script>
+
+
+<div id="cropform" class="modal" align ="centre">
+  <span onclick="document.getElementById('cropform').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action='/process2'  method = "post" >
+    <div class="container">
+      <h2>Get Details of a crop</h2>
+      <hr>
+      <label for="email"><b>Enter query crop</b></label>
+      <input type="text" placeholder="Crop Name" name="crop" required>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('cropform').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+
+var modal = document.getElementById('cropform');
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+  
+<div align = "center" style = "background-color: antiquewhite; width: auto;">
+     <h2 style="color: navy; " class="double"> Search Using Range</h2>
+    <h3 style="color: navy; "><i>Select from the provided entries for each factor</i></h3>
+    <form action="/process" method = "post">
+      <table>
+        <tr>
+        <td><label for="temp">Temperature :</label></td>
+        <td> <select id="temp" name="temp">
+          <option value="10">5 - 15</option>
+          <option value="20">15 -25</option>
+          <option value="30">25 - 35</option>
+          <option value="40">35 - 45</option>
+        </select></td>
+    </br> </tr>
+    <td><label for="rain">Rainfall :</label>
+    <td><select id="rain" name="rain">
+        <option value="15">less than 30</option>
+        <option value="45">30 - 60</option>
+        <option value="75">60 -  90</option>
+        <option value="105">90 - 120</option>
+        <option value="135">120 -150</option>
+        <option value="165">150 -180</option>
+        <option value="195">180 - 210</option>
+        <option value="225">210 -  240</option>
+        <option value="255">240 - 270</option>
+        <option value="285">300 -330</option>
+        <option value="345">330 -360</option>
+        <option value="375">360 - 390</option>
+        <option value="405">390 -420</option>
+        <option value="435">420 -450</option>
+        <option value="465">450 -480</option>
+        
+
+      </select>
+    </br> </tr>
+    <td><label for="soil">Soil type :</label></td>
+    <td><select id="soil" name="soil">
+        <option value="alluvial soil">alluvial soil</option>
+        <option value="black soil">black soil</option>
+        <option value="red and yellow soil">red and yellow soil</option>
+        <option value="arid soil">arid soil</option>
+        <option value="laterite soil">laterite soil</option>
+
+      </select></td>
+    </br> </tr>
+    <td><label for="water">Water :</label></td>
+    <td><select id="water" name="water">
+        <option value="125">less than 250</option>
+        <option value="375">250 - 500</option>
+        <option value="625">500 - 750</option>
+        <option value="875">750 -1000</option>
+        <option value="1125">1000 -1250</option>
+        <option value="1375">1250 - 1500</option>
+        <option value="1625">1500 - 1750</option>
+        <option value="1875">1750 -2000</option>
+        <option value="2125">2000 -2250</option>
+        <option value="2375">2250 - 2500</option>
+        
+      </select></td>
+    </br> </tr>
+
+  </table>
+
+        <input type="submit" >
+
+
+      </form>
+    </div>
+
+      <footer align="center">
+        <p> &#9757;<a href="/exact">
+        Use Exact Values Instead</a>&#9757;</p>
+        </br>
+
+      </footer>
+
+
+</body>
+
+
+
+
+</html> 

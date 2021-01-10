@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+  <style>
+    h2.double {border-style: double;}
+    input[type=text], select {
+      width: 100%;
+      padding: 4px 3px;
+      margin: 8px 0;
+      background-color:rgb(245, 235, 220);
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+      width: 20%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 6px 5px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+  
+
+
+    body {font-family: Arial, Helvetica, sans-serif;  background-color:lemonchiffon;}
+        * {box-sizing: border-box;}
+        
+       
+        
+        
+        /* Set a style for all buttons */
+        button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 15px;
+          cursor: pointer;
+          width: 100%;
+          opacity: 0.9;
+        
+        }
+        
+        button:hover {
+          opacity:1;
+        }
+        
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+          padding: 10px 15px;
+          background-color: #f44336;
+        }
+        
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+          float: left;
+          width: 50%;
+        }
+        
+        /* Add padding to container elements */
+        .container {
+          padding: 16px;
+        }
+        
+        /* The Modal (background) */
+        .modal {
+          display: none; 
+          position: fixed; /* Stay in place */
+          z-index: 1;
+          right: 0;
+          top: 2;
+          width: 80%; /* Full width */
+          height: 80%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: #474e5d;
+          padding-top: 50px;
+        }
+        
+        
+        /* Modal Content/Box */
+        .modal-content {
+          background-color: #fefefe;
+          margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+          border: 1px solid #888;
+          width: 70%; /* Could be more or less, depending on screen size */
+        
+        }
+        
+        
+        /* Style the horizontal ruler */
+        hr {
+          border: 1px solid #f1f1f1;
+          margin-bottom: 25px;
+        }
+         
+        /* The Close Button (x) */
+        .close {
+          position: absolute;
+          right: 35px;
+          top: 15px;
+          font-size: 40px;
+          font-weight: bold;
+          color: #f1f1f1;
+        }
+        
+        .close:hover,
+        .close:focus {
+          color: #f44336;
+          cursor: pointer;
+        }
+        
+        /* Clear floats */
+        .clearfix::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+        
+
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+          .cancelbtn, .signupbtn {
+             width: 100%;
+          }
+        }
+
+    </style>
+
+
+<body>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/">&#9750; Home</a>
+    <a onclick="document.getElementById('cropform').style.display='block'" style="width:auto; " >&#9921; Crop Details</a>
+    <a href="#">&#9743; Contact</a>
+  </div>
+  <div style = "background-color: lightgreen;">
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()"> &#9776; </span>
+</div>
+  <script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+  </script>
+
+
+<div id="cropform" class="modal" align ="centre">
+  <span onclick="document.getElementById('cropform').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action='/process2'  method = "post" >
+    <div class="container">
+      <h2>Get Details of a crop</h2>
+      <hr>
+      <label for="email"><b>Enter query crop</b></label>
+      <input type="text" placeholder="Crop Name" name="crop" required>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('cropform').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+
+var modal = document.getElementById('cropform');
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
+<div align="center" style = "background-color: antiquewhite; width: auto;">
+  <h2 style="color: navy; " class="double"> Search Using Close Values</h2>
+  <h3 style="color: navy; "><i>Fill the entries to get optimal crop suggestion</i></h3>
+    <form action="/process" method = "post" >
+    <table>
+        <tr>
+        <td><label for="temp">Temperature:</label></td>
+        <td><input id="temp" name="temp" placeholder="Degrees Celsius" required></input></td>
+        
+      </tr>
+     <tr><td></br></td></tr>
+    <tr>
+      <td><label for="rain">Rainfall:</label></td>
+        <td><input id="rain" name="rain"  placeholder="cm"required></input></td>
+    </br>
+    </tr>
+    <tr><td></br></td></tr>
+    <tr>
+     <td> <label for="soil">Soil type:</label></td>
+    <td><select id="soil" name="soil" >
+        <option value="alluvial soil">alluvial soil</option>
+        <option value="black soil">black soil</option>
+        <option value="red and yellow soil">red and yellow soil</option>
+        <option value="arid soil">arid soil</option>
+        <option value="laterite soil">laterite soil</option>
+
+      </select>
+    </br></td>
+  </tr>
+  <tr><td></br></td></tr>
+  <tr>
+   <td> <label for="water">Water:</label></td>
+
+   <td><input id="water" name="water" placeholder="mm" required></input></td>
+
+    </br>
+  </tr>
+  <tr><td></br></td></tr>
+      </table>
+      <input type="submit">
+      </form>
+    </div>
+
+
+
+      <footer align="center" >
+        <p> &#9198;<a href="/">
+          Get result based on ranged values</a>&#9197;</p>
+        </br>
+      </footer>
+
+</body>
+
+
+
+
+</html> 
